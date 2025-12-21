@@ -31,4 +31,14 @@ jobs:
           registry-url: https://registry.npmjs.org/
           cache: npm
       - run: npm ci
+  
+      - name: Clean npm auth
+        run: |
+          rm -f ~/.npmrc
+          rm -f .npmrc
+  
+      - name: Show package info
+        run: node -p "require('./package.json').name + ' @ ' + require('./package.json').version"
+  
       - run: npm publish --provenance
+  
