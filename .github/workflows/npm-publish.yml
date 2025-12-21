@@ -36,6 +36,12 @@ jobs:
         run: |
           rm -f ~/.npmrc
           rm -f .npmrc
+      - name: Debug auth presence
+        run: |
+          echo "Has ~/.npmrc?"; ls -la ~ | grep npmrc || true
+          echo "Has repo .npmrc?"; ls -la . | grep npmrc || true
+          echo "Registry:"; npm config get registry
+          echo "Whoami:"; npm whoami || true
   
       - name: Show package info
         run: node -p "require('./package.json').name + ' @ ' + require('./package.json').version"
