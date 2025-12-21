@@ -1,5 +1,8 @@
 # Web Encryption
 
+[![GitHub](https://img.shields.io/badge/GitHub-Repository-black?logo=github)](https://github.com/toneyavuz/web-encryption)
+[![npm](https://img.shields.io/npm/v/web-encryption)](https://www.npmjs.com/package/web-encryption)
+
 Cross platform (web and nodejs) asymmetric and symmetric encryption.
 Rewritten in TypeScript for better type safety and modern usage, while maintaining backward compatibility.
 
