@@ -36,11 +36,16 @@ describe('WebEncryption', () => {
     });
 
     it('should return original data if input is not string', () => {
+        const consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => { });
+
         // @ts-ignore
         const encryption = new WebEncryption();
         // @ts-ignore
         expect(encryption.encrypt(123)).toBe(123);
         // @ts-ignore
         expect(encryption.decrypt(123)).toBe(123);
+
+        expect(consoleSpy).toHaveBeenCalled();
+        consoleSpy.mockRestore();
     });
 });
