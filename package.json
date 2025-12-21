@@ -13,8 +13,12 @@
     "build": "tsup src/index.ts --format cjs,esm --dts",
     "prepublishOnly": "npm run build"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "encryption",
+    "duplex-encryption",
+    "web-encryption"
+  ],
+  "author": "toneyavuz <toneyavuz@gmail.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
