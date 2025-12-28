@@ -1,6 +1,6 @@
-import { WebEncryption, type EncryptionOptions } from './libs/encryption';
+import { WebEncryption, EncryptionOptions, EncryptionObject } from './libs/encryption';
 
-export { WebEncryption, type EncryptionOptions };
+export { WebEncryption, EncryptionOptions, EncryptionObject };
 
 /**
  * Creates a new WebEncryption instance.

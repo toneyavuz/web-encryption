@@ -25,7 +25,7 @@ const encryption = webEncryption();
 const secret = "Hello World";
 
 const encrypted = encryption.encrypt(secret);
-console.log(encrypted);
+console.log(encrypted); // Encrypted data (random characters) with length equal to secret.length
 
 const decrypted = encryption.decrypt(encrypted);
 console.log(decrypted); // Hello World
@@ -51,6 +51,23 @@ const encrypted = encryption.encrypt(secret, id);
 const decrypted = encryption.decrypt(encrypted, id);
 ```
 
+### Saving and Loading State
+
+You can export the encryption mappings to save the state (e.g., to a database) and load them later to restore functionality.
+
+```typescript
+const encryption = new WebEncryption();
+
+// Export the internal state (WARNING: Contains keys)
+const savedState = encryption.getEncryptionObjects();
+
+// Restore in a new instance
+const newEncryption = new WebEncryption();
+newEncryption.loadEncryptionObjects(savedState);
+
+// Now you can decrypt data encrypted by the original instance
+```
+
 ### Options
 
 | Option | Type | Default | Description |
@@ -58,6 +75,7 @@ const decrypted = encryption.decrypt(encrypted, id);
 | `size` | number | 100 | Number of encryption mapping objects to generate |
 | `characterSet` | string[] | `['tr', 'number']` | Predefined character sets to use (e.g. 'en', 'tr') |
 | `characters` | string[] | - | Custom array of characters to use for encryption |
+| `mappingObjects` | EncryptionObject[] | - | Array of previously exported encryption objects to restore state |
 
 ## Workflow & Security Architecture
 

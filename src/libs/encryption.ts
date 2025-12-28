@@ -1,12 +1,13 @@
 import { CHARACTER_SETS } from './characters';
 
-export interface EncryptionOptions {
+export type EncryptionOptions = {
     size?: number;
     characterSet?: string[];
     characters?: string[];
+    mappingObjects?: EncryptionObject[];
 }
 
-interface EncryptionObject {
+export type EncryptionObject = {
     id: string;
     encrypt: Record<string, string>;
     decrypt: Record<string, string>;
@@ -52,7 +53,10 @@ export class WebEncryption {
             }
         }
 
-        if (this.options.characters) {
+
+        if (this.options.mappingObjects) {
+            this.loadEncryptionObjects(this.options.mappingObjects);
+        } else if (this.options.characters) {
             this.createObjects([...this.options.characters]);
             this.createIdArray();
         } else {
@@ -123,6 +127,27 @@ export class WebEncryption {
 
     private createIdArray() {
         this.ids = this.objects.map(obj => obj.id);
+    }
+
+    /**
+     * Returns the internal encryption objects (passwords/mappings).
+     * WARNING: This exposes the keys used for encryption.
+     */
+    public getEncryptionObjects(): EncryptionObject[] {
+        return this.objects;
+    }
+
+    /**
+     * Loads previously created encryption objects.
+     * @param objects Array of EncryptionObject
+     */
+    public loadEncryptionObjects(objects: EncryptionObject[]): void {
+        if (!Array.isArray(objects)) {
+            console.error('WebEncryption: load expected array of EncryptionObject');
+            return;
+        }
+        this.objects = objects;
+        this.createIdArray();
     }
 
     private createObjects(initialCharacters: string[]) {
